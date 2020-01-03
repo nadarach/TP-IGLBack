@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: studentController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: studentController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** 
+ * 
+ * Controleur de la classe étudiant
+ * 
+ */
+
+var Student = require('../Model/studentModel')
+
+/** 
+ * 
+ * Controlleur de la procédure récupérer étudiants 1cp
+ * 
+ */
+
+exports.getCpOneStudents = (req, res) => {
+    console.log('get 1cp Students controller !')
+    Student.getCpOneStudents((err, student) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(student)
+        }
+    })
+}
+
+/** 
+ * 
+ * Controlleur de la procédure récupérer étudiants 2cp
+ * 
+ */
+
+
+exports.getCpTwoStudents = (req, res) => {
+    console.log('get 2cp Students controller !')
+    Student.getCpTwoStudents((err, student) => {
+
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(student)
+        }
+    })
+}
+
+
+/** 
+ * 
+ * Controlleur de la procédure récupérer étudiants 1cs
+ * 
+ */
+
+exports.getCsOneStudents = (req, res) => {
+    console.log('get 1cs Students controller !')
+    Student.getCsOneStudents((err, student) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(student)
+        }
+    })
+}
+
+/** 
+ * 
+ * Controlleur de la procédure récupérer étudiants 2cs
+ * 
+ */
+
+
+exports.getCsTwoStudents = (req, res) => {
+    console.log('get 2cs Students controller !')
+    Student.getCsTwoStudents((err, student) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(student)
+        }
+    })
+}
+
+/** 
+ * 
+ * Controlleur de la procédure récupérer étudiants 3cs
+ * 
+ */
+
+
+exports.getCsThreeStudents = (req, res) => {
+    console.log('get 3cs Students controller !')
+    Student.getCsThreeStudents((err, student) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(student)
+        }
+    })
+}
+
+/** 
+ * 
+ * Controlleur de la procédure ajouter étudiant
+ * 
+ */
+
+
+exports.addStudent = (req, res) => {
+    console.log('addStudent controller !')
+
+    var newStudent = req.body.student
+    console.log(newStudent)
+
+    if (!newStudent.nom || !newStudent.prenom || !newStudent.annee) {
+        res.status(400).send({ error:true, message: 'Please provide nom/prenom/annee' });
+    }
+    else {
+        Student.creatStudent(newStudent, (err, student) => {
+            if (err) {
+                res.send(err)
+            } else {
+                res.json(newStudent)
+            }
+        })
+    }
+}
+
+/** 
+ * 
+ * Controlleur de la procédure mise à jour des étudiants
+ * 
+ */
+
+exports.updateStudent = (req, res) => {
+    console.log('updateStudent controller !')
+    console.log("Body.student.annee : " + req.body.student.annee)
+    var updatedStudent = req.body.student
+    console.log("Before model ! " + updatedStudent)
+    Student.update(req.params.id, updatedStudent, (err, student) => {
+        if (err) {
+            res.send(err)
+        } else {
+            console.log("Final result " + updatedStudent)
+            res.json(updatedStudent)
+        }
+    })
+}
+
+/** 
+ * 
+ * Controlleur de la procédure suppression étudiant
+ * 
+ */
+
+exports.deleteStudent = (req, res) => {
+    console.log('deleteStudent controller !')
+    var student = req.body
+    console.log(req.params.id)
+    console.log(student)
+    Student.remove(req.params.id, (err, student) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.json({"message": "Student deleted !"})
+        }
+    })
+}
+
+/*function addStudent2(student) {
+    if (!student.nom || !student.prenom || !student.annee) {
+        return 'Please provide nom/prenom/annee';
+    }
+    else {
+        Student.creatStudent(student, (err, student) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        return JSON.stringify(student);
+    }
+}
+
+module.exports = {addStudent2}; */</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addStudent">addStudent</a></li><li><a href="global.html#deleteStudent">deleteStudent</a></li><li><a href="global.html#getCpOneStudents">getCpOneStudents</a></li><li><a href="global.html#getCpTwoStudents">getCpTwoStudents</a></li><li><a href="global.html#getCsOneStudents">getCsOneStudents</a></li><li><a href="global.html#getCsThreeStudents">getCsThreeStudents</a></li><li><a href="global.html#getCsTwoStudents">getCsTwoStudents</a></li><li><a href="global.html#Student">Student</a></li><li><a href="global.html#updateStudent">updateStudent</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Jan 03 2020 17:01:29 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
